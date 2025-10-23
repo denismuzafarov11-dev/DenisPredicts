@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: denispredicts-backend
+    env: docker
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    plan: free
+    regions:
+      - oregon
+    envVars:
+      - key: API_KEY
+        fromDatabase: false
+      - key: BASE_URL
+        fromDatabase: false
+      - key: ODDSPORTAL_KEY
+        fromDatabase: false
+      - key: ODDSPORTAL_URL
+        fromDatabase: false
+      - key: OPENAI_API_KEY
+        fromDatabase: false
