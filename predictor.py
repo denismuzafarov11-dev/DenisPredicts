@@ -77,7 +77,7 @@ class MasterPredictorEngine:
 
         hg = df.groupby("HomeTeam").agg(wg=("weight", "sum"), wf=("wh", "sum"), wag=("wa", "sum"))
         ag = df.groupby("AwayTeam").agg(wg=("weight", "sum"), wf=("wa", "sum"), wag=("wh", "sum"))
-        st = hg.join(ag, suffixes=("_h", "_a"), how="outer").fillna(0)
+        st = hg.merge(ag, left_index=True, right_index=True, how="outer", suffixes=("_h", "_a")).fillna(0)
 
         st["att_h"] = (st["wf_h"] / np.maximum(st["wg_h"], 1e-4)) / avg_h
         st["def_h"] = (st["wag_h"] / np.maximum(st["wg_h"], 1e-4)) / avg_a
@@ -134,7 +134,7 @@ class MasterPredictorEngine:
 
         hg = sub.groupby("HomeTeam").agg(wg=("weight", "sum"), wf=("wh", "sum"), wag=("wa", "sum"))
         ag = sub.groupby("AwayTeam").agg(wg=("weight", "sum"), wf=("wa", "sum"), wag=("wh", "sum"))
-        st = hg.join(ag, suffixes=("_h", "_a"), how="outer").fillna(0)
+        st = hg.merge(ag, left_index=True, right_index=True, how="outer", suffixes=("_h", "_a")).fillna(0)
         st["att_h"] = (st["wf_h"] / np.maximum(st["wg_h"], 1e-4)) / avg_h
         st["def_h"] = (st["wag_h"] / np.maximum(st["wg_h"], 1e-4)) / avg_a
         st["att_a"] = (st["wf_a"] / np.maximum(st["wg_a"], 1e-4)) / avg_a
