@@ -5,3 +5,9 @@ python-dotenv
 APScheduler
 pydantic
 openai
+numpy
+pandas
+matplotlib
+scipy
+tabulate
+openpyxl
